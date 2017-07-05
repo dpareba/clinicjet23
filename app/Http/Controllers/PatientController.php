@@ -363,7 +363,7 @@ class PatientController extends Controller
     {
      $this->validate($request,[
         'name'=>'required|max:255',
-        'midname'=>'required|max:255',
+        'midname'=>'max:255',
         'surname'=>'required|max:255',
         'gender'=>'required|max:6',
         'bloodgroup'=>'required|max:10',
@@ -376,15 +376,17 @@ class PatientController extends Controller
         ]);
 
      $patient = Patient::find($id);
-     $patient->name = $request->name;
-     $patient->midname = $request->midname;
-     $patient->surname = $request->surname;
-     $patient->gender = $request->gender;
+      $patient->name = trim(Str::upper($request->name));
+        $patient->midname = trim(Str::upper($request->midname));
+        $patient->surname = trim(Str::upper($request->surname));
+     $patient->namemidsur = $request->namemidsur;
+     $patient->namesur = $request->namesur;
+     $patient->gender = Str::upper($request->gender);
      $patient->phoneprimary = $request->phoneprimary;
      $patient->phonealternate = $request->phonealternate;
      $patient->email = $request->email;
-     $patient->address = $request->address;
-     $patient->allergies = $request->allergies;
+     $patient->address = Str::upper($request->address);
+     $patient->allergies = Str::upper($request->allergies);
      $patient->bloodgroup = $request->bloodgroup;
      $patient->idproof = $request->idproof;
      $patient->save();
