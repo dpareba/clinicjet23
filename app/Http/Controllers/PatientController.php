@@ -242,7 +242,7 @@ class PatientController extends Controller
         $bmidata = Visit::where('patient_id','=',$patient->id)->where('bmi','!=','')->get();
 
         $bpchart = Charts::multi('areaspline','highcharts')
-        ->height(300)
+        ->height(250)
                         //->colors(['#58355E','#7AE7C7'])
                         //->colors(['#6E0D25','#FFFFB3'])
                         //->colors(['#7EB19F','#0C8282'])
